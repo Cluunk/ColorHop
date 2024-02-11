@@ -6,7 +6,7 @@ public class SceneLoader : MonoBehaviour
 {
     public void StartGame()
     {
-        GameManager.Instance.ResetScore();
+        GameManager.Instance.ResetTime();
     }
     
     public void LoadScene(string scene)

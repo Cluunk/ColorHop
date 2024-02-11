@@ -8,8 +8,8 @@ public class LevelClock : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerDisplay;
     
     [SerializeField] private float clockSpeed = 1;
-    [SerializeField] private float maxTime = 350;
-    public float CurrentTime { get; private set; }
+    
+    private bool started;
 
     private void Start()
     {
@@ -18,15 +18,23 @@ public class LevelClock : MonoBehaviour
 
     private void ResetClock()
     {
-        CurrentTime = maxTime;
+        timerDisplay.text = ((int)GameManager.Instance.CurrentTime).ToString();
+    }
+
+    public void StartClock()
+    {
+        started = true;
     }
 
     private void Update()
     {
-        CurrentTime -= Time.deltaTime * Mathf.Abs(clockSpeed);
+        if (!started)
+            return;
+        
+        GameManager.Instance.CurrentTime -= Time.deltaTime * Mathf.Abs(clockSpeed);
         if (timerDisplay)
             DisplayTimer();
-        if (CurrentTime <= 0)
+        if (GameManager.Instance.CurrentTime <= 0)
         {
             //GameManager.Instance.CurrentLevel.Player.TakeDamage();
             SceneManager.LoadScene("Lose");
@@ -36,13 +44,13 @@ public class LevelClock : MonoBehaviour
 
     private void DisplayTimer()
     {
-        timerDisplay.text = $"{(int)CurrentTime}";
+        timerDisplay.text = $"{(int)GameManager.Instance.CurrentTime}";
     }
     
     public void IncreaseTimer(float increaseAmount)
     {
-        CurrentTime += increaseAmount;
-        if (CurrentTime > maxTime)
-            CurrentTime = maxTime;
+        GameManager.Instance.CurrentTime += increaseAmount;
+        if (GameManager.Instance.CurrentTime > GameManager.MaxTime)
+            GameManager.Instance.CurrentTime = GameManager.MaxTime;
     }
 }

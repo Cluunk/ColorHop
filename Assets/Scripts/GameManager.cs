@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public Level CurrentLevel { get; set; }
-    public int Score { get; private set; }
+
+    public const int MaxTime = 999;
+    public float CurrentTime { get; set; } = MaxTime;
 
     private void Awake()
     {
@@ -30,15 +32,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(level);
     }
 
-    public void AddScore(int amountToAdd)
+    public void ResetTime()
     {
-        if (amountToAdd < 0)
-            return;
-        Score += amountToAdd;
-    }
-
-    public void ResetScore()
-    {
-        Score = 0;
+        CurrentTime = MaxTime;
     }
 }

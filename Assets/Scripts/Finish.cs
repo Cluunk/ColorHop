@@ -10,7 +10,6 @@ public class Finish : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        GameManager.Instance.AddScore((int)GameManager.Instance.CurrentLevel.Clock.CurrentTime);
         GameManager.Instance.LoadLevel(nextLevel);
     }
 }

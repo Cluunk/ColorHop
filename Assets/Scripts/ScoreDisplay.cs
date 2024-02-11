@@ -12,7 +12,7 @@ public class ScoreDisplay : MonoBehaviour
     private IEnumerator Start()
     {
         BackgroundMusicManager.Instance.SetBackgroundMusic(null);
-        display.text = $"Score: {GameManager.Instance.Score}";
+        display.text = $"Score: {(int)GameManager.Instance.CurrentTime}";
         yield return new WaitUntil(() => BackgroundMusicManager.Instance.Volume() <= 0);
         Instantiate(winSound);
     }

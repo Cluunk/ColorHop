@@ -21,7 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
-        
+    
+    public bool CanMove { get; set; }
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!CanMove)
+            return;
         MoveInput();
     }
 
